@@ -1,13 +1,5 @@
 <?php
-$con = mysqli_connect("localhost","root","","social");
-
-if(mysqli_connect_errno())
-{
-    echo "Failed to Connect : " . mysqli_connect_errno();
-}
-
-$query = mysqli_query($con,"Insert into test values ('', 'Ali')");
-
+require 'config/config.php';
 
 ?>
 <!DOCTYPE html>
