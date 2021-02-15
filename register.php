@@ -12,10 +12,35 @@ require 'includes/form_handlers/login_handler.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Media App</title>
     <link rel="stylesheet" type="text/css" href="assets/css/register_style.css">
+        <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="assets/js/register.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+
+    <?php 
+
+    if(isset($_POST['register_button']))
+    {
+        echo '
+        <script>
+        
+        $(document).ready(function() {
+            $("#first").hide();
+            $("#second").show();
+        });
+        
+        </script>
+        ';
+    }
+    ?>
+
     <div class="wrapper">
       <div class="login_box">
         <div class="login_header">
