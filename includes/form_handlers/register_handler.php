@@ -1,116 +1,107 @@
 <?php
+//Declaring variables to prevent errors
+$fname = ""; //First name
+$lname = ""; //Last name
+$em = ""; //email
+$em2 = ""; //email 2
+$password = ""; //password
+$password2 = ""; //password 2
+$date = ""; //Sign up date 
+$error_array = array(); //Holds error messages
 
-//Declaring the variables
-$fname=""; //First Name
-$lname=""; //Last Name
-$em=""; //Email
-$em2=""; //Confirm Email
-$password=""; //Password
-$password2=""; //Confirm Password
-$date= ""; //Registartion Date
-$error_array=array(); //Holds the error Message
+if(isset($_POST['register_button'])){
 
-if(isset($_POST['register_button']))
-{
-    //Registration Form values
+	//Registration form values
 
-    //First Name
-    $fname= strip_tags($_POST['reg_fname']); //Remove html code
-    $fname= str_replace(' ','',$fname); //Remove spaces
-    $fname= ucfirst(strtolower($fname)); //UpperCase First Letter
-    $_SESSION['reg_fname'] = $fname; //Stores first name into session variable
+	//First name
+	$fname = strip_tags($_POST['reg_fname']); //Remove html tags
+	$fname = str_replace(' ', '', $fname); //remove spaces
+	$fname = ucfirst(strtolower($fname)); //Uppercase first letter
+	$_SESSION['reg_fname'] = $fname; //Stores first name into session variable
 
-    //Last Name
-    $lname= strip_tags($_POST['reg_lname']); //Remove html code
-    $lname= str_replace(' ','',$lname); //Remove spaces
-    $lname= ucfirst(strtolower($lname)); //UpperCase First Letter
-    $_SESSION['reg_lname'] = $lname; //Stores last name into session variable
+	//Last name
+	$lname = strip_tags($_POST['reg_lname']); //Remove html tags
+	$lname = str_replace(' ', '', $lname); //remove spaces
+	$lname = ucfirst(strtolower($lname)); //Uppercase first letter
+	$_SESSION['reg_lname'] = $lname; //Stores last name into session variable
 
-    //Email
-    $em= strip_tags($_POST['reg_email']); //Remove html code
-    $em= str_replace(' ','',$em); //Remove spaces
-    $em= ucfirst(strtolower($em)); //UpperCase First Letter
-    $_SESSION['reg_emai'] = $em; //Stores email into session variable
+	//email
+	$em = strip_tags($_POST['reg_email']); //Remove html tags
+	$em = str_replace(' ', '', $em); //remove spaces
+	$em = ucfirst(strtolower($em)); //Uppercase first letter
+	$_SESSION['reg_email'] = $em; //Stores email into session variable
 
-    //Confirm Email
-    $em2= strip_tags($_POST['reg_email2']); //Remove html code
-    $em2= str_replace(' ','',$em2); //Remove spaces
-    $em2= ucfirst(strtolower($em2)); //UpperCase First Letter
-    $_SESSION['reg_emai2'] = $em2; //Stores email into session variable
+	//email 2
+	$em2 = strip_tags($_POST['reg_email2']); //Remove html tags
+	$em2 = str_replace(' ', '', $em2); //remove spaces
+	$em2 = ucfirst(strtolower($em2)); //Uppercase first letter
+	$_SESSION['reg_email2'] = $em2; //Stores email2 into session variable
 
-    //Email
-    $password= strip_tags($_POST['reg_password']); //Remove html code
-    $password2= strip_tags($_POST['reg_password2']); //Remove html code
+	//Password
+	$password = strip_tags($_POST['reg_password']); //Remove html tags
+	$password2 = strip_tags($_POST['reg_password2']); //Remove html tags
 
-    $date= date("Y-m-d"); //Current date
+	$date = date("Y-m-d"); //Current date
 
-    if($em == $em2)
-    {
-        //Check email if in valid format
-        if(filter_var($em,FILTER_VALIDATE_EMAIL))
-        {
-            $em = filter_var($em, FILTER_VALIDATE_EMAIL);
+	if($em == $em2) {
+		//Check if email is in valid format 
+		if(filter_var($em, FILTER_VALIDATE_EMAIL)) {
 
-            //Check if email already Exits
-            $e_check = mysqli_query($con,"Select email from users where email='$em'");
+			$em = filter_var($em, FILTER_VALIDATE_EMAIL);
 
-            //Count the number of rows Returend
-            $num_rows = mysqli_num_rows($e_check);
+			//Check if email already exists 
+			$e_check = mysqli_query($con, "SELECT email FROM users WHERE email='$em'");
 
-            if($num_rows > 0)
-            {
-                array_push($error_array, "Email already in use<br>");
-            }
-        }
-        else
-        {
-            array_push($error_array, "Invalid email format<br>");
-        } 
+			//Count the number of rows returned
+			$num_rows = mysqli_num_rows($e_check);
+
+			if($num_rows > 0) {
+				array_push($error_array, "Email already in use<br>");
+			}
+
+		}
+		else {
+			array_push($error_array, "Invalid email format<br>");
+		}
 
 
-    }
-    else
-    {
-        array_push($error_array, "Email don't Match<br>");
-    }
+	}
+	else {
+		array_push($error_array, "Emails don't match<br>");
+	}
 
-    if(strlen($fname) > 25 || strlen($fname) < 2)
-    {
-        array_push($error_array, "Your first name must be between 2 to 25 charaters<br>");
-    }
-    
-    if(strlen($lname) > 25 || strlen($lname) < 2)
-    {
-        array_push($error_array, "Your last name must be between 2 to 25 charaters<br>");
-    }
 
-    if($password != $password2)
-    {
-        array_push($error_array, "Your Password donot Match<br>");
-    } 
-    else
-    {
-        if(preg_match('/[^A-Za-z0-9]/',$password))
-        {
-            array_push($error_array, "Your password can only contain english characters or numbers<br>");
-        }
-    }
+	if(strlen($fname) > 25 || strlen($fname) < 2) {
+		array_push($error_array, "Your first name must be between 2 and 25 characters<br>");
+	}
 
-    
-    if(strlen($password) > 30 || strlen($password) < 5)
-    {
-        array_push($error_array, "Your password must be between 5 to 30 charaters<br>");
-    }
+	if(strlen($lname) > 25 || strlen($lname) < 2) {
+		array_push($error_array,  "Your last name must be between 2 and 25 characters<br>");
+	}
 
-    if(empty($error_array))
-    {
-        $password = md5($password);//Encryped password before sending to database
+	if($password != $password2) {
+		array_push($error_array,  "Your passwords do not match<br>");
+	}
+	else {
+		if(preg_match('/[^A-Za-z0-9]/', $password)) {
+			array_push($error_array, "Your password can only contain english characters or numbers<br>");
+		}
+	}
 
-        //Generating username by concatenating first and last name 
-        $username = strtolower($fname . "_" . $lname);
-        $check_username_query = mysqli_query($con, "Select username from user where username='$username'");
+	if(strlen($password > 30 || strlen($password) < 5)) {
+		array_push($error_array, "Your password must be betwen 5 and 30 characters<br>");
+	}
 
-        $i = 0; 
+
+	if(empty($error_array)) {
+		$password = md5($password); //Encrypt password before sending to database
+
+		//Generate username by concatenating first name and last name
+		$username = strtolower($fname . "_" . $lname);
+		$check_username_query = mysqli_query($con, "SELECT username FROM users WHERE username='$username'");
+
+
+		$i = 0; 
 		//if username exists add number to username
 		while(mysqli_num_rows($check_username_query) != 0) {
 			$i++; //Add 1 to i
@@ -118,25 +109,25 @@ if(isset($_POST['register_button']))
 			$check_username_query = mysqli_query($con, "SELECT username FROM users WHERE username='$username'");
 		}
 
-        //Profile picture assignment
-        $rand = rand(1,2); //Random number between 1 and 2
+		//Profile picture assignment
+		$rand = rand(1, 2); //Random number between 1 and 2
 
-        if($rand == 1)
-            $profile_pic = "assets/images/profile_pics/defaults/head_deep_blue.png";
-        else if($rand == 2)
-            $profile_pic = "assets/images/profile_pics/defaults/head_green_sea.png"; 
-            
-        $query = mysqli_query($con, "insert into users values ('','$fname','$lname','$username','$em','$password','$date','$profile_pic','0','0','no',',')");    
-   
-        array_push($error_array, "<span style='color: #14C800;'>You'ar all set! Goahead and login!</span><br>");
+		if($rand == 1)
+			$profile_pic = "assets/images/profile_pics/defaults/head_deep_blue.png";
+		else if($rand == 2)
+			$profile_pic = "assets/images/profile_pics/defaults/head_emerald.png";
 
-        //Clear session variables
-        $_SESSION['reg_fname'] = "";
-        $_SESSION['reg_lname'] = "";
-        $_SESSION['reg_email'] = "";
-        $_SESSION['reg_email2'] = "";
-    }
+
+		$query = mysqli_query($con, "INSERT INTO users VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
+
+		array_push($error_array, "<span style='color: #14C800;'>You're all set! Go ahead and login!</span><br>");
+
+		//Clear session variables 
+		$_SESSION['reg_fname'] = "";
+		$_SESSION['reg_lname'] = "";
+		$_SESSION['reg_email'] = "";
+		$_SESSION['reg_email2'] = "";
+	}
 
 }
-
 ?>

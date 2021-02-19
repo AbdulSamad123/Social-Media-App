@@ -24,8 +24,21 @@ class User {
 		$username = $this->user['username'];
 		$query = mysqli_query($this->con, "SELECT first_name, last_name FROM users WHERE username='$username'");
 		$row = mysqli_fetch_array($query);
-		return $row['first_name']. " " .$row['last_name'];
+		return $row['first_name'] . " " . $row['last_name'];
 	}
+
+	
+    public function isClosed() {
+        $username= $this->user['username'];
+        $query = mysqli_query($this->con, "Select user_closed from users where username='$username'");
+        $row = mysqli_fetch_array($query);
+
+        if($row['user_closed'] == 'yes')
+            return true;
+        else
+            return false;    
+
+    }
 
 
 

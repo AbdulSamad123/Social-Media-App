@@ -1,14 +1,17 @@
-<?php
+<?php 
 include("includes/header.php");
-?>
+ ?>
+	
+
+	<div class="main_column column">
+		This is a profile page!
 
 
-    <div class="main_column column">
+	</div>
 
-    This is profile page
-    
-    </div>
 
-   </div> 
+
+
+	</div>
 </body>
 </html>
