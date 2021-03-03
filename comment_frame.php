@@ -1,18 +1,4 @@
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-</head>
-<body>
-
-    <style>
-    * {
-        font-size:12px;
-        font-family:Arial, Helvetica, Sans-serif;
-    }
-    </style>
-
-	<?php  
+<?php  
 	require 'config/config.php';
 	include("includes/classes/User.php");
 	include("includes/classes/Post.php");
@@ -27,6 +13,21 @@
 	}
 
 	?>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+
+    <style>
+    * {
+        font-size:12px;
+        font-family:Arial, Helvetica, Sans-serif;
+    }
+    </style>
+
+
 	<script>
 		function toggle() {
 			var element = document.getElementById("comment_section");
@@ -53,7 +54,7 @@
 		$post_body = $_POST['post_body'];
 		$post_body = mysqli_escape_string($con, $post_body);
 		$date_time_now = date("Y-m-d H:i:s");
-		$insert_post = mysqli_query($con, "INSERT INTO comments VALUES ('', '$post_body', '$userLoggedIn', '$posted_to', '$date_time_now', 'no', '$post_id'");
+		$insert_post = mysqli_query($con, "INSERT INTO comments VALUES ('', '$post_body', '$userLoggedIn', '$posted_to', '$date_time_now', 'no', '$post_id')");
 		echo "<p>Comment Posted! </p>";
 	}
 	?>
@@ -167,6 +168,10 @@
             </div>
            <?php 
         }
+    }
+    else
+    {
+        echo "<center><br><br>No Comments to show!</center>";
     }
     ?>
 

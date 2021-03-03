@@ -13,7 +13,6 @@ require 'includes/form_handlers/login_handler.php';
 	<script src="assets/js/register.js"></script>
 </head>
 <body>
-
 	<?php  
 
 	if(isset($_POST['register_button'])) {

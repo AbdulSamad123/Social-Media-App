@@ -11,6 +11,14 @@ if(isset($_POST['post'])){
 
 
  ?>
+
+ <style>
+     a {
+    color: #20AAE5;
+    text-decoration: none;
+    }
+
+ </style>
 	<div class="user_details column">
 		<a href="<?php echo $userLoggedIn; ?>">  <img src="<?php echo $user['profile_pic']; ?>"> </a>
 
@@ -98,3 +106,7 @@ if(isset($_POST['post'])){
 	</div>
 </body>
 </html>
+
+
+
+

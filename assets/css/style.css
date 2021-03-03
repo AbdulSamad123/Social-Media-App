@@ -12,11 +12,6 @@ body {
 	background-color: #E6EAE8;
 }
 
-a {
-	color: #337ab7;
-	text-decoration: none;
-}
-
 .top_bar {
 	width: 100%;
 	min-width: 1050px;
@@ -140,4 +135,33 @@ textarea:focus {
 
 .post_form input[type="submit"]:active {
 	padding: 5px 4px 4px 5px;
+}
+
+.newsfeedPostOptions {
+	padding: 0px;
+	border: none;
+	text-decoration: none;
+	color:#20AAE5;
+}
+
+.newsfeedPostOptions iframe{
+	border: 0px;
+	height: 17px;
+	width: 120px;
+}
+
+.comment_like {
+	background-color: transparent;
+	border: none;
+	font-size: 14px;
+	color: #3498db;
+	padding: 0;
+	height: auto;
+	width: auto;
+	margin: 0;
+}
+
+.like_value {
+	display: inline;
+	font-size: 14px;
 }
