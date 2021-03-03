@@ -196,7 +196,7 @@ class Post {
 						}
 					}  
 
-					$str .= "<div class='status_post' onClick='javascript:toggle$id()' style='width: 96%; font-size: 14px; padding: 0px 5px;	min-height: 75px;'>
+					$str .= "<div class='status_post' onClick='javascript:toggle$id()' style='width: 96%; font-size: 14px; padding: 0px 5px; min-height: 75px; cursor:pointer;'>
 								<div class='post_profile_pic' style='float: left; margin-right: 7px;'>
 								<img src='$profile_pic' width='50' style='border-radius:5px;'>
 								</div>
@@ -213,7 +213,7 @@ class Post {
 							</div>
 
 							<div class='post_comment' id='toggleComment$id' style='display:none;'>
-							   <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+							   <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0' style='max-height: 250px; width: 100%;'></iframe>
 							</div>
 							<hr>";
 					}		

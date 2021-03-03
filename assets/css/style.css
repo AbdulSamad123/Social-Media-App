@@ -12,6 +12,11 @@ body {
 	background-color: #E6EAE8;
 }
 
+a {
+	color: #337ab7;
+	text-decoration: none;
+}
+
 .top_bar {
 	width: 100%;
 	min-width: 1050px;
