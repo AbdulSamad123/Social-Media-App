@@ -1,7 +1,6 @@
 <?php  
 require 'config/config.php';
 
-
 if (isset($_SESSION['username'])) {
 	$userLoggedIn = $_SESSION['username'];
 	$user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
@@ -20,7 +19,8 @@ else {
 	<!-- Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
-
+	<script src="assets/js/social.js"></script>
+	
 	<!-- CSS -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
@@ -48,7 +48,7 @@ else {
 			<a href="#">
 				<i class="fa fa-bell fa-lg"></i>
 			</a>
-			<a href="#">
+			<a href="requests.php">
 				<i class="fa fa-users fa-lg"></i>
 			</a>
 			<a href="#">

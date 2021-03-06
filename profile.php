@@ -12,6 +12,23 @@ if(isset($_GET['profile_username']))
 	$num_friends = (substr_count($user_array['friend_array'], ",")) - 1;
 }
 
+if(isset($_POST['remove_friend'])) 
+{
+	$user = new User($con, $userLoggedIn);
+	$user->removeFriend($username);
+}
+
+if(isset($_POST['add_friend'])) 
+{
+	$user = new User($con, $userLoggedIn);
+	$user->sendRequest($username);
+}
+
+if(isset($_POST['respond_request'])) 
+{
+	header("Location: request.php");
+}
+
  ?>
 
     <style type="text/css">
@@ -52,6 +69,39 @@ if(isset($_GET['profile_username']))
 			margin: 0 0 0 20px;
 			word-wrap: break-word;
 		}
+
+		.danger {
+			background-color: #e74c3c;
+		}
+
+		.warning {
+			background-color: #f0ad4e;
+		}
+
+		.default {
+			background-color: #bdc3c7;
+		}
+
+		.success {
+			background-color: #2ecc71;
+		}
+
+		.info {
+			background-color: #3498db;
+		}
+
+		.deep_blue {
+			background-color: #0043f0;
+		}
+
+		.profile_left input[type="submit"] {
+			width: 90%;
+			height: 30px;
+			border-radius: 5px;
+			margin: 7px 0 0 7px;
+			border: none;
+			color: #fff;
+		}
 	</style>
 	<div class="profile_left">
 	    <img src="<?php echo $user_array['profile_pic'];?>">
@@ -62,7 +112,7 @@ if(isset($_GET['profile_username']))
 			<p><?php echo "Friends: " . $num_friends ?></p>
 		</div>
 
-		<form action="<?php echo $username; ?>">
+		<form action="<?php echo $username; ?>" method="POST">
 		    <?php
 			$profile_user_obj = new User($con, $username);
 			if($profile_user_obj->isClosed()) {
@@ -93,7 +143,8 @@ if(isset($_GET['profile_username']))
 
 			?>
 		</form>
-	
+		<input type="submit" class="deep_blue" data-toggle="modal" data-target="#post_Form" value="Post Something">
+ 	
 	</div>
 
 	<div class="main_column column">
@@ -102,6 +153,35 @@ if(isset($_GET['profile_username']))
 
 	</div>
 
+<!-- Modal -->
+	<div class="modal fade" id="post_Form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" id="exampleModalLabel">Post Something!</h4>
+		  </div>
+		  <div class="modal-body">
+		    <p>This will appear on the user's profile page and also their newsfeed for your friend to see!</p>
+
+			<form class="profile_post" action="" method="POST">
+			    <div class="form-group">
+				    <textarea class="form-control" name="post_body"></textarea>
+					<input type="submit" name="user_form" value="<?php echo $userLoggedIn; ?>">
+					<input type="submit" name="user_form" value="<?php echo $username; ?>">
+				</div>
+			</form> 
+		  </div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" name="post_button" id="submit_profile_post">Post</button>
+		</div>
+		</div>
+	</div>
+	</div>
 
 
 
