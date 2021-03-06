@@ -31,7 +31,8 @@ class User {
 		$username = $this->user['username'];
 		$query = mysqli_query($this->con, "SELECT profile_pic FROM users WHERE username='$username'");
 		$row = mysqli_fetch_array($query);
-		return $row['profile_pic'];
+		return $row['profile_pic']
+		;
 	}
 
 	
@@ -61,6 +62,33 @@ class User {
 		}
 	}
 
+	public function didReceivedRequest($user_to)
+	{
+		$user_from= $this->user['username'];
+		$check_request_query = mysqli_query($this->con, "select * from friend_requests where  user_to='$user_to' and user_from='$user_from'");
+		if(mysqli_num_rows($check_request_query) > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function didsendRequest($user_from)
+	{
+		$user_to= $this->user['username'];
+		$check_request_query = mysqli_query($this->con, "select * from friend_requests where  user_to='$user_to' and user_from='$user_from'");
+		if(mysqli_num_rows($check_request_query) > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 
 }
