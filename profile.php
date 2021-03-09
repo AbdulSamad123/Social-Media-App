@@ -30,12 +30,17 @@ if(isset($_POST['respond_request']))
 }
 
  ?>
-
     <style type="text/css">
 	    .wrapper {
 			margin-left: 0px;
 			padding-left: 0px;
 		}
+
+		a {
+		color: #20AAE5;
+		text-decoration: none;
+		}
+
 		.profile_left {
 			top: -10px;
 			width: 17px;
@@ -102,6 +107,28 @@ if(isset($_POST['respond_request']))
 			border: none;
 			color: #fff;
 		}
+
+		.delete_button {
+			height: 22px;
+			width: 22px;
+			padding: 0;
+			float: right;
+			border-radius: 4px;
+			right: -15px;
+			position: relative;
+		}
+
+		.profile_main_column {
+			min-width:675px;
+			float:left;
+			width:70%;
+			z-index:-1;
+		}
+
+		.profile_info_bottom {
+			margin: 10 0 0 7px;
+		}
+
 	</style>
 	<div class="profile_left">
 	    <img src="<?php echo $user_array['profile_pic'];?>">
@@ -144,11 +171,18 @@ if(isset($_POST['respond_request']))
 			?>
 		</form>
 		<input type="submit" class="deep_blue" data-toggle="modal" data-target="#post_Form" value="Post Something">
- 	
+		<?php 		
+			if($userLoggedIn != $username) {
+				echo '<div class="profile_info_bottom">';
+				echo $logged_in_user_obj->getMutualFriends($username) . " Mutual friends";
+				echo '</div>';
+			}
+		?>
 	</div>
 
-	<div class="main_column column">
-		<?php echo $username; ?>
+	<div class="profile_main_column column">
+	<div class="posts_area"></div>
+    <img id="loading" src="assets/images/icons/loading.gif">
 
 
 	</div>
@@ -170,8 +204,8 @@ if(isset($_POST['respond_request']))
 			<form class="profile_post" action="" method="POST">
 			    <div class="form-group">
 				    <textarea class="form-control" name="post_body"></textarea>
-					<input type="submit" name="user_form" value="<?php echo $userLoggedIn; ?>">
-					<input type="submit" name="user_form" value="<?php echo $username; ?>">
+					<input type="hidden" name="user_from" value="<?php echo $userLoggedIn; ?>">
+					<input type="hidden" name="user_to" value="<?php echo $username; ?>">
 				</div>
 			</form> 
 		  </div>
@@ -182,6 +216,62 @@ if(isset($_POST['respond_request']))
 		</div>
 	</div>
 	</div>
+
+	<script>
+  var userLoggedIn = '<?php echo $userLoggedIn; ?>';
+  var profileUsername = '<?php echo $username; ?>';
+
+  $(document).ready(function() {
+
+    $('#loading').show();
+
+    //Original ajax request for loading first posts 
+    $.ajax({
+      url: "includes/handlers/ajax_load_profile_posts.php",
+      type: "POST",
+      data: "page=1&userLoggedIn=" + userLoggedIn + "&profileUsername=" + profileUsername,
+      cache:false,
+
+      success: function(data) {
+        $('#loading').hide();
+        $('.posts_area').html(data);
+      }
+    });
+
+    $(window).scroll(function() {
+      var height = $('.posts_area').height(); //Div containing posts
+      var scroll_top = $(this).scrollTop();
+      var page = $('.posts_area').find('.nextPage').val();
+      var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+
+      if ((document.body.scrollHeight == document.body.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+        $('#loading').show();
+
+        var ajaxReq = $.ajax({
+          url: "includes/handlers/ajax_load_profile_posts.php",
+          type: "POST",
+          data: "page=" + page + "&userLoggedIn=" + userLoggedIn + "&profileUsername=" + profileUsername,
+          cache:false,
+
+          success: function(response) {
+            $('.posts_area').find('.nextPage').remove(); //Removes current .nextpage 
+            $('.posts_area').find('.noMorePosts').remove(); //Removes current .nextpage 
+
+            $('#loading').hide();
+            $('.posts_area').append(response);
+          }
+        });
+
+      } //End if 
+
+      return false;
+
+    }); //End (window).scroll(function())
+
+
+  });
+
+  </script>
 
 
 

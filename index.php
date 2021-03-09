@@ -18,6 +18,16 @@ if(isset($_POST['post'])){
     text-decoration: none;
     }
 
+	.delete_button {
+		height: 22px;
+		width: 22px;
+		padding: 0;
+		float: right;
+		border-radius: 4px;
+		right: -15px;
+		position: relative;
+	}
+
  </style>
 	<div class="user_details column">
 		<a href="<?php echo $userLoggedIn; ?>">  <img src="<?php echo $user['profile_pic']; ?>"> </a>
