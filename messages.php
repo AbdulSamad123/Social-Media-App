@@ -102,6 +102,7 @@ if(isset($_POST['post_message'])) {
 	#grey {
 		color: #8C8C8C;
 	}
+
  </style>
 
   <div class="user_details column">
@@ -163,7 +164,7 @@ if(isset($_POST['post_message'])) {
 						$(".results").html(data);
 					});
 				}
-				
+
 			var div = document.getElementById("scroll_messages");
 			div.scrollTop = div.scrollHeight;
 		</script>
@@ -176,7 +177,7 @@ if(isset($_POST['post_message'])) {
 			<div class="loaded_conversations">
 				<?php echo $message_obj->getConvos(); ?>
 			</div>
-			<br>
-			<a href="messages.php?u=new">New Message</a>
+			<!-- <br>
+			<a href="messages.php?u=new">New Message</a> -->
 
 		</div> 
