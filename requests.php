@@ -2,6 +2,7 @@
 include("includes/header.php"); //Header 
 include("includes/classes/User.php");
 include("includes/classes/Post.php");
+include("includes/classes/Message.php");
 ?>
 
 <style>

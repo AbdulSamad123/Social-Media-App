@@ -175,3 +175,25 @@ textarea:focus {
 	right: -15px;
 	position: relative;
 }
+
+#message_textarea {
+	width: 80%;
+	margin-right: 8px;
+}
+
+#message_submit {
+	height: 41px;
+	width: 120px;
+	margin: 0;
+	position: absolute;
+	border: none;
+	background-color: #20AAE5;
+	color: #156588;
+	border-radius: 5px;
+	width: 13%;
+	height: 35px;
+	margin-top: 3px;
+	font-family: 'Bellota-BoldItalic', sans-serif;
+	text-shadow: #73B6E2 0.5px 0.5px 0px;
+
+}
