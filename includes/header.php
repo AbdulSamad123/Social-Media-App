@@ -38,6 +38,8 @@ else {
 			var pageName;
 
 			if(type == 'notification') {
+			    pageName = "ajax_load_notifications.php";
+				$("span").remove("#unread_notifications");
 
 			}
 			else if (type == 'message') {
@@ -103,6 +105,24 @@ else {
 		color: #8C8C8C;
 	}
  
+	.resultDisplayNotification {
+		height: auto;
+		color: #1485BD;
+		padding-bottom: 7px;
+	}
+
+	.resultDisplayNotification img {
+		height: 40px;
+		border-radius: 5px;
+		margin: 1px 12px 0px 2px;
+		float: left;
+	}
+
+	.timestamp_smaller {
+		font-size: 85%;
+		margin: 0;
+	}
+
 	</style>
 
 </head>
@@ -126,7 +146,7 @@ else {
 			<a href="javascript:void(0);" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'message')">
 				<i class="fa fa-envelope fa-lg"></i>
 			</a>
-			<a href="#">
+			<a href="javascript:void(0);" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'notification')">
 				<i class="fa fa-bell fa-lg"></i>
 			</a>
 			<a href="requests.php">

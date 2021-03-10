@@ -173,6 +173,16 @@ if(isset($_POST['post_message'])) {
 			float: left;
 			margin-bottom: 5px;
 		}
+
+		.delete_button {
+			height: 22px;
+			width: 22px;
+			padding: 0;
+			float: right;
+			border-radius: 4px;
+			right: -15px;
+			position: relative;
+		}
 	</style>
 	<div class="profile_left">
 	    <img src="<?php echo $user_array['profile_pic'];?>">
