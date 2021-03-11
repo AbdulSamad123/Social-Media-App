@@ -1,5 +1,38 @@
 $(document).ready(function() {
 
+	$('#search_text_input').focus(function() {
+		if(window.matchMedia( "(min-width: 800px)" ).matches) {
+			$(this).animate({width: '250px'}, 500);
+		}
+	});
+
+	$('.button_holder').on('click', function() {
+		document.search_form.submit();
+	})
+
+	//Button for profile post
+	$('#submit_profile_post').click(function(){
+		
+		$.ajax({
+			type: "POST",
+			url: "includes/handlers/ajax_submit_profile_post.php",
+			data: $('form.profile_post').serialize(),
+			success: function(msg) {
+				$("#post_form").modal('hide');
+				location.reload();
+			},
+			error: function() {
+				alert('Failure');
+			}
+		});
+
+	});
+
+
+});
+
+$(document).ready(function() {
+
 	//Button for profile post
 	$('#submit_profile_post').click(function(){
 		
