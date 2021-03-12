@@ -51,7 +51,7 @@ else {
 			padding: 0;
 			float: right;
 			border-radius: 4px;
-			right: -15px;
+			right: -5px;
 			position: relative;
 		}
  </style>
